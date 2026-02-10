@@ -2,40 +2,56 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    static boolean isSorted(int [] arr) {
+     static int secondSmallest(int[] arr, int n) {
 
-        int n = 0;
-        int c = arr[0];
+        if(n < 2) {
+            return -1;
+        }
 
-        if(arr[0] <= arr[1]){
-            for (int i = 0; i < arr.length; i++) {
-                if (c <= arr[i]) {
-                    c=arr[i];
-                    n++;
-                }
+        int smallest = Integer.MAX_VALUE;
+        int second_smallest =  Integer.MAX_VALUE;
+
+        for(int i = 0; i < n; i++) {
+            if(arr[i] < smallest) {
+                second_smallest = smallest;
+                smallest = arr[i];
             }
-            if(n == arr.length){
-                return true;
-            }
-            else {
-                return false;
-            }
-        } else if (arr[0] >= arr[1]) {
-            for (int i = 0; i < arr.length; i++) {
-                if (c >= arr[i]) {
-                    c=arr[i];
-                    n++;
-                }
-            }
-            if(n == arr.length){
-                return true;
-            }
-            else {
-                return false;
+            else if(arr[i] < second_smallest && arr[i] != smallest) {
+                second_smallest = arr[i];
             }
         }
 
-        return false;
+         if(second_smallest == Integer.MAX_VALUE) {
+             return arr[0];
+         }
+
+        return second_smallest;
+    }
+
+     static int secondLargest(int [] arr, int n) {
+
+        if(n < 2) {
+            return -1;
+        }
+
+        int largest = Integer.MIN_VALUE;
+        int second_largest =  Integer.MIN_VALUE;
+
+        for(int i = 0; i < n; i++) {
+            if(arr[i] > largest) {
+                second_largest = largest;
+                largest = arr[i];
+            }
+            else if(arr[i] > second_largest && arr[i] != largest) {
+                second_largest = arr[i];
+            }
+        }
+
+        if(second_largest == Integer.MIN_VALUE) {
+            return arr[0];
+        }
+
+        return second_largest;
     }
 
     public static void main(String[] args) {
@@ -50,8 +66,11 @@ class Arrayz {
             arr[i] = sc.nextInt();
         }
 
-        boolean b = isSorted(arr);
-        System.out.println("Array Sorted? "+b);
+        int second_smallest = Arrayz.secondSmallest(arr, n);
+        int second_largest = Arrayz.secondLargest(arr, n);
+
+        System.out.println("Second Smallest Element: "+second_smallest);
+        System.out.println("Second Largest Element: "+second_largest);
 
     }
 
