@@ -2,30 +2,56 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    public static int Largest(int[] arr, int max) {
+    static boolean isSorted(int [] arr) {
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
+        int n = 0;
+        int c = arr[0];
+
+        if(arr[0] <= arr[1]){
+            for (int i = 0; i < arr.length; i++) {
+                if (c <= arr[i]) {
+                    c=arr[i];
+                    n++;
+                }
+            }
+            if(n == arr.length){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } else if (arr[0] >= arr[1]) {
+            for (int i = 0; i < arr.length; i++) {
+                if (c >= arr[i]) {
+                    c=arr[i];
+                    n++;
+                }
+            }
+            if(n == arr.length){
+                return true;
+            }
+            else {
+                return false;
             }
         }
 
-        return max;
+        return false;
     }
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        int max;
-        int []arr = new int [10];
+        System.out.println("Enter the number of elements in the array: ");
+        int n = sc.nextInt();
+        int []arr = new int [n];
 
         for (int i = 0; i < arr.length; i++) {
             arr[i] = sc.nextInt();
         }
-        max = arr[0];
-        max = Largest(arr, max);
-        System.out.println("Largest Number in Array: "+max);
+
+        boolean b = isSorted(arr);
+        System.out.println("Array Sorted? "+b);
 
     }
 
