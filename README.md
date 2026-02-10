@@ -6,4 +6,4 @@ Java array programs.
 - Largest Number in Array
 
 ## Branches
-- program-b : Next array problem
+- is-sorted : Checks if array is sorted in Increasing or Decreasing order
