@@ -2,56 +2,14 @@ import java.util.Scanner;
 
 class Arrayz {
 
-     static int secondSmallest(int[] arr, int n) {
+    static int linearSearch(int[] arr, int key) {
 
-        if(n < 2) {
-            return -1;
-        }
-
-        int smallest = Integer.MAX_VALUE;
-        int second_smallest =  Integer.MAX_VALUE;
-
-        for(int i = 0; i < n; i++) {
-            if(arr[i] < smallest) {
-                second_smallest = smallest;
-                smallest = arr[i];
-            }
-            else if(arr[i] < second_smallest && arr[i] != smallest) {
-                second_smallest = arr[i];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == key) {
+                return i;
             }
         }
-
-         if(second_smallest == Integer.MAX_VALUE) {
-             return arr[0];
-         }
-
-        return second_smallest;
-    }
-
-     static int secondLargest(int [] arr, int n) {
-
-        if(n < 2) {
-            return -1;
-        }
-
-        int largest = Integer.MIN_VALUE;
-        int second_largest =  Integer.MIN_VALUE;
-
-        for(int i = 0; i < n; i++) {
-            if(arr[i] > largest) {
-                second_largest = largest;
-                largest = arr[i];
-            }
-            else if(arr[i] > second_largest && arr[i] != largest) {
-                second_largest = arr[i];
-            }
-        }
-
-        if(second_largest == Integer.MIN_VALUE) {
-            return arr[0];
-        }
-
-        return second_largest;
+        return -1;
     }
 
     public static void main(String[] args) {
@@ -66,11 +24,17 @@ class Arrayz {
             arr[i] = sc.nextInt();
         }
 
-        int second_smallest = Arrayz.secondSmallest(arr, n);
-        int second_largest = Arrayz.secondLargest(arr, n);
+        System.out.println("Enter the element to be searched: ");
+        int key = sc.nextInt();
 
-        System.out.println("Second Smallest Element: "+second_smallest);
-        System.out.println("Second Largest Element: "+second_largest);
+        int index = linearSearch(arr, key);
+
+        if (index == -1) {
+            System.out.println("Element not found");
+        }
+        else {
+            System.out.println("Element found at index: " + index);
+        }
 
     }
 
