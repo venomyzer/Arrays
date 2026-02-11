@@ -3,41 +3,17 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    static void reverseArray(int[] arr, int start, int end) {
-        while (start < end) {
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-            start++;
-            end--;
-        }
-    }
+    static int removeDuplicates(int[] arr, int n) {
 
-    static void rotateArray(int[] arr, int k, String direction) {
-
-        int n = arr.length;
-
-        if (k == 0 || n == 0) {
-            return;
+        int i = 0;
+        for (int j = 1; j < n; j++) {
+            if (arr[j] != arr[i]) {
+                arr[i+1] = arr[j];
+                i++;
+            }
         }
 
-        k = k % n;
-
-        if (direction.equals("right")) {
-
-            reverseArray(arr, 0, n - 1);
-            reverseArray(arr, 0, k-1);
-            reverseArray(arr, k, n-1);
-
-        }
-
-        if (direction.equals("left")) {
-
-            reverseArray(arr, 0, k - 1);
-            reverseArray(arr, k, n-1);
-            reverseArray(arr, 0, n-1);
-
-        }
+        return i+1;
     }
 
     public static void main(String[] args) {
@@ -49,19 +25,15 @@ class Arrayz {
 
         int []arr = new int [n];
 
-        System.out.println("Enter the elements in the array: ");
+        System.out.println("Enter the elements ascending order including duplicates: ");
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println("Enter number of places to rotate: ");
-        int k = sc.nextInt();
-        System.out.println("Enter the direction of the array: ");
-        String direction = sc.next().toLowerCase();
+        int size = removeDuplicates(arr, n);
+        System.out.println("The number of unique elements in the array is: "+size);
+        System.out.println("The array with removed duplicates is: "+Arrays.toString(Arrays.copyOf(arr, size)));
 
-        rotateArray(arr, k, direction);
-
-        System.out.println("The rotated array is: " + Arrays.toString(arr));
     }
 
 }
