@@ -2,30 +2,41 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    public static int Largest(int[] arr, int max) {
+    static int maxConsecutiveOnes(int [] arr, int n) {
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
+        int streak = 0, count = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 1) {
+                count++;
+                if (count > streak) {
+                    streak = count;
+                }
+            }
+            else {
+                count = 0;
             }
         }
 
-        return max;
+        return streak;
     }
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        int max;
-        int []arr = new int [10];
+        System.out.println("Enter the number of elements in the array: ");
+        int n = sc.nextInt();
 
-        for (int i = 0; i < arr.length; i++) {
+        int []arr = new int [n];
+
+        System.out.println("Enter the elements in the array (zeroes and ones): ");
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        max = arr[0];
-        max = Largest(arr, max);
-        System.out.println("Largest Number in Array: "+max);
+
+        int streak = maxConsecutiveOnes(arr, n);
+        System.out.println("Maximum consecutive ones are: "+streak);
 
     }
 
