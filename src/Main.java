@@ -3,17 +3,19 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    static int removeDuplicates(int[] arr, int n) {
+    static int missingNumber(int[] arr, int n) {
 
-        int i = 0;
-        for (int j = 1; j < n; j++) {
-            if (arr[j] != arr[i]) {
-                arr[i+1] = arr[j];
-                i++;
-            }
+        int actualSum = 0, expectedSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            actualSum += arr[i];
+        }
+        for (int i = 1; i <= n+1; i++) {
+            expectedSum += i;
         }
 
-        return i+1;
+        return (expectedSum-actualSum);
+
     }
 
     public static void main(String[] args) {
@@ -25,14 +27,13 @@ class Arrayz {
 
         int []arr = new int [n];
 
-        System.out.println("Enter the elements ascending order including duplicates: ");
+        System.out.println("Enter the elements: ");
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        int size = removeDuplicates(arr, n);
-        System.out.println("The number of unique elements in the array is: "+size);
-        System.out.println("The array with removed duplicates is: "+Arrays.toString(Arrays.copyOf(arr, size)));
+        int missing = missingNumber(arr, n);
+        System.out.println("The missing number is: "+missing);
 
     }
 
