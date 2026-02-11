@@ -3,26 +3,40 @@ import java.util.Scanner;
 
 class Arrayz {
 
-    static void zeroesToEnd(int [] arr, int n) {
-
-        int j = -1, temp = 0;
-        for(int i = 0; i < n; i++) {
-            if(arr[i] == 0) {
-                j = i;
-                break;
-            }
+    static void reverseArray(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
         }
-        if(j == -1) {
+    }
+
+    static void rotateArray(int[] arr, int k, String direction) {
+
+        int n = arr.length;
+
+        if (k == 0 || n == 0) {
             return;
         }
 
-        for(int i = j+1; i < n; i++) {
-            if(arr[i] != 0) {
-                temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                j++;
-            }
+        k = k % n;
+
+        if (direction.equals("right")) {
+
+            reverseArray(arr, 0, n - 1);
+            reverseArray(arr, 0, k-1);
+            reverseArray(arr, k, n-1);
+
+        }
+
+        if (direction.equals("left")) {
+
+            reverseArray(arr, 0, k - 1);
+            reverseArray(arr, k, n-1);
+            reverseArray(arr, 0, n-1);
+
         }
     }
 
@@ -40,9 +54,14 @@ class Arrayz {
             arr[i] = sc.nextInt();
         }
 
-        zeroesToEnd(arr, n);
-        System.out.println("The updated elements in the array are: "+ Arrays.toString(arr));
+        System.out.println("Enter number of places to rotate: ");
+        int k = sc.nextInt();
+        System.out.println("Enter the direction of the array: ");
+        String direction = sc.next().toLowerCase();
 
+        rotateArray(arr, k, direction);
+
+        System.out.println("The rotated array is: " + Arrays.toString(arr));
     }
 
 }
