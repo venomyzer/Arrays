@@ -1,24 +1,29 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Arrayz {
 
-    static int maxConsecutiveOnes(int [] arr, int n) {
+    static void zeroesToEnd(int [] arr, int n) {
 
-        int streak = 0, count = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == 1) {
-                count++;
-                if (count > streak) {
-                    streak = count;
-                }
-            }
-            else {
-                count = 0;
+        int j = -1, temp = 0;
+        for(int i = 0; i < n; i++) {
+            if(arr[i] == 0) {
+                j = i;
+                break;
             }
         }
+        if(j == -1) {
+            return;
+        }
 
-        return streak;
+        for(int i = j+1; i < n; i++) {
+            if(arr[i] != 0) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                j++;
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -30,13 +35,13 @@ class Arrayz {
 
         int []arr = new int [n];
 
-        System.out.println("Enter the elements in the array (zeroes and ones): ");
+        System.out.println("Enter the elements in the array: ");
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        int streak = maxConsecutiveOnes(arr, n);
-        System.out.println("Maximum consecutive ones are: "+streak);
+        zeroesToEnd(arr, n);
+        System.out.println("The updated elements in the array are: "+ Arrays.toString(arr));
 
     }
 
